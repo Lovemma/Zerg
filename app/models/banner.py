@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 
-from sqlalchemy import Column, String, Integer
+from sqlalchemy import Column, String, Integer, ForeignKey
 from sqlalchemy.dialects.mysql import TINYINT
+from sqlalchemy.orm import relationship
 
 from app.models import Base
 
@@ -16,9 +17,6 @@ class Banner(Base):
 class BannerItem(Base):
     __tablename__ = 'banner_item'
 
-    img_id = Column(Integer,
-                    nullable=False,
-                    comment='外键，关联image表')
     keyword = Column('key_word',
                      String(100),
                      nullable=False,
@@ -27,6 +25,12 @@ class BannerItem(Base):
                   nullable=False,
                   default=1,
                   comment='跳转类型: 0)无 1)商品 2)专题')
+    img_id = Column(Integer,
+                    ForeignKey('image.id'),
+                    comment='外键，关联image表')
     banner_id = Column(Integer,
-                       nullable=False,
+                       ForeignKey('banner.id'),
                        comment='外键，关联banner表')
+
+    img = relationship('Image', backref='banner')
+    banner = relationship('Banner', backref='banner_item')

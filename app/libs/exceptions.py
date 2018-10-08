@@ -7,7 +7,6 @@ from werkzeug.exceptions import HTTPException as _HTTPException
 class HTTPException(_HTTPException):
     code = 500
     msg = '服务器内部错误!'
-    results = []
 
     def __init__(self, msg=None, code=None):
         if msg:
@@ -29,3 +28,6 @@ class HTTPException(_HTTPException):
         return [('Content-Type', 'application/json')]
 
 
+class NotFound(HTTPException):
+    code = 404
+    msg = '肥肠抱歉，你要请求的数据没找到...'

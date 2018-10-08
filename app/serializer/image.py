@@ -6,4 +6,3 @@ class ImageSchema(ma.Schema):
 
     class Meta:
         fields = ('url',)
-

@@ -8,7 +8,7 @@ from app.serializer import ma
 
 def create_app():
 
-    app = Flask(__name__)
+    app = Flask(__name__, static_folder='./static')
     app.config.from_object('app.config.settings')
 
     register_blueprint(app)
