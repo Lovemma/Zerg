@@ -6,6 +6,10 @@ name = "pypi"
 [packages]
 flask = "*"
 flask-sqlalchemy = "*"
+flask-marshmallow = "*"
+marshmallow-sqlalchemy = "*"
+marshmallow = "*"
+connexion = "*"
 
 [dev-packages]
 
