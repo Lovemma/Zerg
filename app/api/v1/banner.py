@@ -1,13 +1,10 @@
 # -*- coding: utf-8 -*-
 
-from flask import request, jsonify
-from sqlalchemy import and_
+from flask import jsonify
 
-from app import db
 from app.libs.exceptions import NotFound
 from app.libs.redprint import Redprint
 from app.models.banner import BannerItem
-from app.models.image import Image
 from app.serializer.banner import BannerItemSchema
 
 api = Redprint('banner')

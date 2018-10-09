@@ -9,7 +9,7 @@ flask-sqlalchemy = "*"
 flask-marshmallow = "*"
 marshmallow-sqlalchemy = "*"
 marshmallow = "*"
-connexion = "*"
+flask-restful = "*"
 
 [dev-packages]
 
