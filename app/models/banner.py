@@ -5,6 +5,7 @@ from sqlalchemy.dialects.mysql import TINYINT
 from sqlalchemy.orm import relationship
 
 from app.models import Base
+from app.models.image import Image
 
 
 class Banner(Base):
@@ -32,5 +33,5 @@ class BannerItem(Base):
                        ForeignKey('banner.id'),
                        comment='外键，关联banner表')
 
-    img = relationship('Image', backref='banner')
-    banner = relationship('Banner', backref='banner_item')
+    img = relationship(Image, backref='banner')
+    banner = relationship(Banner, backref='banner_item')
