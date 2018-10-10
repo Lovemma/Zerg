@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from flask import jsonify
 
+from app.libs.exceptions import NotFound
 from app.libs.redprint import Redprint
 from app.models.product import Product
 from app.serializer.product import ProductSchema
@@ -17,3 +18,17 @@ def read_recent_product():
         return jsonify(result)
     else:
         return jsonify({})
+
+
+@api.route('/<int:product_id>', methods=['GET'])
+def read_one_product(product_id):
+    product = Product.query.filter_by(id=product_id).first()
+
+    if product is not None:
+
+        product_schema = ProductSchema()
+        result = product_schema.dump(product).data
+
+        return jsonify(result)
+    else:
+        raise NotFound()
