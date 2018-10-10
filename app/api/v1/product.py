@@ -4,7 +4,7 @@ from flask import jsonify
 from app.libs.exceptions import NotFound
 from app.libs.redprint import Redprint
 from app.models.product import Product
-from app.serializer.product import ProductSchema
+from app.serializer.product import ProductRecentSchema, ProductDetailSchema
 
 api = Redprint('product')
 
@@ -13,7 +13,7 @@ api = Redprint('product')
 def read_recent_product():
     products = Product.query.limit(15).all()
     if products is not None:
-        product_schema = ProductSchema(many=True)
+        product_schema = ProductRecentSchema(many=True)
         result = product_schema.dump(products).data
         return jsonify(result)
     else:
@@ -26,7 +26,7 @@ def read_one_product(product_id):
 
     if product is not None:
 
-        product_schema = ProductSchema()
+        product_schema = ProductDetailSchema()
         result = product_schema.dump(product).data
 
         return jsonify(result)

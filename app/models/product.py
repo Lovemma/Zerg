@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 
-from sqlalchemy import Column, String, Integer
+from sqlalchemy import Column, String, Integer, ForeignKey
 from sqlalchemy.dialects.mysql import DECIMAL, TINYINT
+from sqlalchemy.orm import relationship
 
 from app.models import Base
 
@@ -18,3 +19,12 @@ class Product(Base):
     category_id = Column(Integer)
     img_id = Column(Integer)
 
+    properties = relationship("Property")
+
+
+class Property(Base):
+    __tablename__ = 'product_property'
+
+    name = Column(String(30))
+    detail = Column(String, nullable=False)
+    product_id = Column(Integer, ForeignKey('product.id'))
