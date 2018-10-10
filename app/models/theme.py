@@ -1,9 +1,14 @@
 # -*- coding: utf-8 -*-
-from sqlalchemy import Column, String, Integer, ForeignKey
+from sqlalchemy import Column, String, Integer, ForeignKey, Table
 from sqlalchemy.orm import relationship
 
 from app.models import Base
-from app.models.image import Image
+
+theme_product = Table(
+    'theme_product', Base.metadata,
+    Column('theme_id', Integer, ForeignKey('theme.id'), primary_key=True),
+    Column('product_id', Integer, ForeignKey('product.id'), primary_key=True),
+)
 
 
 class Theme(Base):
@@ -18,3 +23,6 @@ class Theme(Base):
                              foreign_keys=[topic_img_id])
     head_img = relationship('Image', backref='theme_head',
                             foreign_keys=[head_img_id])
+
+    products = relationship('Product', secondary=theme_product,
+                            backref='themes')
